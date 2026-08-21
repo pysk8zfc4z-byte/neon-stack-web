@@ -1,0 +1,17 @@
+# PWAのキャッシュ事故対策。ここを間違えると、更新したのに古い版が配られ続ける。
+#
+# /assets/* はビルドごとにファイル名へハッシュが付くので、永久にキャッシュしてよい。
+# index.html と sw.js はファイル名が変わらないので、キャッシュさせてはいけない。
+# ここをキャッシュすると、新しい /assets に到達できなくなる。
+
+/index.html
+  Cache-Control: no-cache
+
+/sw.js
+  Cache-Control: no-cache
+
+/manifest.webmanifest
+  Cache-Control: no-cache
+
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
